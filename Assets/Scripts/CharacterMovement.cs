@@ -79,11 +79,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "enemyClone"){
             if(pumbingProtection){
-<<<<<<< Updated upstream
-                GameObject breakAnimation = transform.Find("BreakAnimation").gameObject;
-=======
                 GameObject breakAnimation = collision.transform.Find("BreakAnimation").gameObject;
->>>>>>> Stashed changes
                 breakAnimation.SetActive(true);
                 breakAnimation.transform.parent = null;
             } else {
@@ -91,10 +87,6 @@ public class CharacterMovement : MonoBehaviour
                 StartCoroutine(hitAnimation());
             }
             Destroy(collision.gameObject);
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         }
     }
 
