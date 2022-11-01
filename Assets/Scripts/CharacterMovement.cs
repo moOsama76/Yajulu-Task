@@ -7,8 +7,8 @@ public class CharacterMovement : MonoBehaviour
 {
     public GameObject camera, fakeLand, fakeBody, healthBar, rightArm, leftArm, skateBoard, gameOver, score, distance, plus1000;
     float camDistanceY, camDistanceZ, fwdSpeed = 0.5f, sideSpeed = 0.25f, animationTime = 0.8f, gravityScale = 15, tiltScale = 10f, tiltDuration = .2f;
-    int gravityDirection = 1, timeInSpace = 0, floatingLimit = 5, overFloatingPunishment = 7, pumbingCost = 3;
-    public int currentHealth = 100;
+    int timeInSpace = 0, floatingLimit = 5, overFloatingPunishment = 7, pumbingCost = 3;
+    public int currentHealth = 100, gravityDirection = 1;
     bool validFlipAnimation = true, playerOverFloating = false, pumbingProtection = false;
     public bool playerAlive = true;
     Rigidbody characterRigidbody;
@@ -77,11 +77,16 @@ public class CharacterMovement : MonoBehaviour
     void OnCollisionEnter(Collision collision){
 
         if (collision.gameObject.tag == "enemyClone"){
-            if(!pumbingProtection){
+            if(pumbingProtection){
+                GameObject breakAnimation = transform.Find("BreakAnimation").gameObject;
+                breakAnimation.SetActive(true);
+                breakAnimation.transform.parent = null;
+            } else {
                 applyDamage(12);
-                Destroy(collision.gameObject);
                 StartCoroutine(hitAnimation());
             }
+            Destroy(collision.gameObject);
+
         }
     }
 
