@@ -68,6 +68,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     void Start(){
+        Physics.gravity = new Vector3(0, -gravityScale, 0);
         camDistanceZ = camera.transform.position.z - transform.position.z;
         camDistanceY = camera.transform.position.y - transform.position.y;
         characterRigidbody = GetComponent<Rigidbody>();
